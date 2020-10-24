@@ -1,2 +1,1 @@
-# Object-oriented-programming
-Object oriented programming problems
+Done in C++ and Java
