@@ -1,0 +1,28 @@
+package karting;
+
+public class Krivina extends Specificnost {
+private double zadatVmax;
+
+
+	public Krivina(double maxx) {
+	zadatVmax=maxx;
+}
+public double maxi {
+	return zadatVmax;
+}
+	@Override
+	public void ispoljiEfekat(Vozilo v) throws GNeodgovarajuciObjekat {
+		if(!(v instanceof Vozilo)) throw new GNeodgovarajuciObjekat();
+		if(v.dohvMaksBrzinu()>zadatVmax*v.dohvUpravljivost()) {
+			v.postMaksBrzinu(zadatVmax*v.dohvUpravljivost());
+		}
+
+	}
+
+	@Override
+	public void ponistiEfekat(Vozilo v) throws GNeodgovarajuciObjekat {
+		// TODO Auto-generated method stub
+
+	}
+
+}

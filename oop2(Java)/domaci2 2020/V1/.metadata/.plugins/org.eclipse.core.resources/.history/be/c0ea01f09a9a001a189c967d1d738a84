@@ -1,0 +1,16 @@
+package main;
+import raspored.*;
+
+public class Main {
+
+	public static void main(String[] args) {
+
+		try {
+		
+			Vreme trajanje = new Vreme(0, 30), pomeraj = new Vreme(9, 45);
+			
+		} catch (GVreme  e) {
+			e.printStackTrace();
+		}
+	}
+}

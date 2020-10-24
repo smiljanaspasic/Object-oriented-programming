@@ -1,0 +1,21 @@
+package raspored;
+
+public class Sadrzaj {
+private String naziv;
+private Vreme vtraj;
+private Vreme vPoc= new Vreme();
+public Sadrzaj(String naz,Vreme v) {
+	naziv=naz;
+	vtraj=v;
+}
+public Vreme preklapaSe(Sadrzaj s2) throws GVreme {
+	Vreme vkraj1=vPoc.saberi(vPoc, vtraj);
+	Vreme vkraj2=s2.vPoc.saberi(s2.vPoc,s2.vtraj);
+	for(Vreme Vtren=vPoc;Vtren.jednakovreme(vkraj1);Vtren.saberi(Vtren, new Vreme(0,15))) {
+		
+	}
+	
+	
+}
+
+}

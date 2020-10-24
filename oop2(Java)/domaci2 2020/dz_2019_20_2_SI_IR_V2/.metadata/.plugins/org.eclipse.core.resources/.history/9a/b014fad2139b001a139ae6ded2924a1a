@@ -1,0 +1,11 @@
+package karting;
+
+public class Specificnost {
+private static int posid=0;
+private int id=++posid;
+public int dohvatiId() {
+	return id;
+}
+private int 
+
+}

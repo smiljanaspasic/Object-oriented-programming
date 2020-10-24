@@ -1,0 +1,14 @@
+package karting;
+
+public abstract class Specificnost {
+private static int posid=0;
+private int id=++posid;
+
+public abstract void ispoljiEfekat(Vozilo v) throws GNeodgovarajuciObjekat;
+
+public abstract void ponistiEfekat(Vozilo v) throws GNeodgovarajuciObjekat();
+
+
+public int dohvatiId() {
+	return id; } 
+}

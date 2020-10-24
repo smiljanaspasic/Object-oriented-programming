@@ -1,0 +1,163 @@
+/*package karting;
+
+public class Vozilo {
+private double vmax;
+private double a;
+private double uprav;
+private String ime;
+private double vtren=0;
+public Vozilo(double vm,double ubrz,double upr,String i) {
+	vmax=vm;
+	a=ubrz;
+	uprav=upr;
+	ime=i;
+}
+
+
+public void postMaksBrzinu(double vmm) { vmax=vmm; if(vtren>vmm) { vtren=vmm; }}
+public void postUbrzanje(double aa) { a=aa; }
+public void postUpravljivost(double u) { uprav=u; }
+public void postTrenBrzinu(double tren) {  vtren=tren; }
+public void postIme(String nime) { ime=nime; }
+public double dohvMaksBrzinu() { return vmax; }
+public String dohvIme() { return ime; }
+public double dohvUbrzanje() { return a;}
+public double dohvUpravljivost() { return uprav; }
+public double dohvTrenBrzinu() { return vtren; }
+public double pomeriVozilo(int t) {
+	double s=0;
+	double t2=(vmax-vtren)/a;
+	if(t<t2) {
+		s=vtren*t+(a*t*t)/2;
+		vtren=vtren+a*t;
+	}
+	else {
+		s=vtren-t2+(a*t2*t2)/2+(t-t2)*vmax;
+		vtren=vmax;
+	}
+	return s;
+}
+public double izracunajVreme(double s) {
+double s2=(vmax*vmax-vtren*vtren)/(2*a);
+if(s<=s2) {
+	return (-vtren+Math.sqrt(vtren*vtren+2*a*s))/a;}
+
+else {	return (vmax-vtren)/a+(s-s2)/vmax;
+} }
+
+
+
+public String toString() {
+	return ime + " ["+vmax+", "+a+", "+uprav+"]";
+} }
+*/
+package karting;
+
+public class Vozilo {
+	private double maksBrzina;
+	private double ubrzanje;
+	private double upravljivost;
+	private double trenBrzina=0;
+	private String imeTakmicara;
+	private double maksOriginal;
+
+
+	public Vozilo(double maksBrzina, double ubrzanje, double upravljivost, String imeTakmicara) {
+		this.maksBrzina = maksBrzina;
+		this.ubrzanje = ubrzanje;
+		this.upravljivost = upravljivost;
+		this.imeTakmicara = imeTakmicara;
+		this.maksOriginal = maksBrzina;
+	}
+	
+	public double dohvMaksOriginal() {
+		return maksOriginal;
+	}
+	
+	public void postMaksOriginal(double maksOriginal) {
+		this.maksOriginal=maksOriginal;
+	}
+
+
+	public double dohvMaksBrzinu() {
+		return maksBrzina;
+	}
+
+
+	public void postMaksBrzinu(double maksBrzina) {
+		this.maksBrzina = maksBrzina;
+		if (trenBrzina>maksBrzina)
+			trenBrzina=maksBrzina;
+	}
+
+
+	public double dohvUbrzanje() {
+		return ubrzanje;
+	}
+
+
+	public void postUbrzanje(double ubrzanje) {
+		this.ubrzanje = ubrzanje;
+	}
+
+
+	public double dohvUpravljivost() {
+		return upravljivost;
+	}
+
+
+	public void postUpravljivost(double upravljivost) {
+		this.upravljivost = upravljivost;
+	}
+
+
+	public double dohvTrenBrzinu() {
+		return trenBrzina;
+	}
+
+
+	public void postTrenBrzinu(double trenBrzina) {
+		this.trenBrzina = trenBrzina;
+	}
+
+
+	public String dohvIme() {
+		return imeTakmicara;
+	}
+
+
+	public void postImeTakmicara(String imeTakmicara) {
+		this.imeTakmicara = imeTakmicara;
+	}
+
+	
+	public double pomeriVozilo(double t) {
+		double tx = (maksBrzina-trenBrzina)/ubrzanje;
+		double s = 0;
+		if (t < tx) {
+			s=trenBrzina*t+(ubrzanje*t*t)/2;
+			trenBrzina = trenBrzina + ubrzanje*t;
+		} else {
+			s = trenBrzina*tx+(ubrzanje*tx*tx)/2 + (t - tx) * maksBrzina;
+			trenBrzina = maksBrzina;
+		}
+		return s;
+	}
+	
+	public double izracunajVreme(double s) {
+		double sx = (maksBrzina*maksBrzina - trenBrzina*trenBrzina) / (2 * ubrzanje);
+		if (s <= sx) {
+			 return (-trenBrzina+Math.sqrt(trenBrzina*trenBrzina+2*ubrzanje*s))/ubrzanje;
+		} else {
+			return (maksBrzina-trenBrzina)/ubrzanje + (s - sx) / maksBrzina;
+		}
+	}
+	
+	public String toString() {
+		return imeTakmicara + " ["+maksBrzina+", "+ubrzanje+", "+upravljivost+"]";
+	}
+	
+	
+	
+
+}

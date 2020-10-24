@@ -1,0 +1,24 @@
+package karting;
+
+public abstract class Specificnost {
+private static int posid=0;
+private int id=++posid;
+
+public abstract void ispoljiEfekat(Vozilo v) throws GNeodgovarajuciObjekat;
+
+public abstract void ponistiEfekat(Vozilo v) throws GNeodgovarajuciObjekat;
+
+
+public int dohvatiId() {
+	return id; } 
+
+public Specificnost clone() {
+	Specificnost spec = null;
+	try{
+		spec = (Specificnost)super.clone();
+		spec.id=++posid;
+		
+	} 
+	catch(CloneNotSupportedException e) {}
+	return spec;
+} }

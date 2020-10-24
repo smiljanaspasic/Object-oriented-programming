@@ -1,0 +1,36 @@
+package raspored;
+
+public class Vreme
+{
+    private int sat;
+    private int min;
+    
+    public Vreme(int s, int m) throws GVreme {
+        if (this.sat < 0 || this.sat > 23 || this.min < 0 || this.min > 59) {
+            throw new GVreme();
+        }
+        if (this.min % 15 != 0) {
+            throw new GVreme();
+        }
+        this.sat = s;
+        this.min = m;
+    }
+    
+    public Vreme() {
+        this.sat = 0;
+        this.min = 0;
+    }
+    
+    public boolean jednakovreme(final Vreme v2) {
+        return this.min == v2.min && this.sat == v2.sat;
+    }
+    
+    public Vreme saberi(Vreme vreme,Vreme vreme2) {
+       int sat=vreme.sat+vreme2.sat;
+       int min=vreme.min+vreme2.min;
+       if(min>=60) {min=min-60; sat++; }
+	   Vreme v3=new Vreme(sat,min);
+	   
+   
+}
+    }

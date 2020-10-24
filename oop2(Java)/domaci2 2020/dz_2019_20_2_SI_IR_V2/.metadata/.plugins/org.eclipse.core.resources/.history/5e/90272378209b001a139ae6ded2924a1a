@@ -1,0 +1,38 @@
+package karting;
+
+public class Krivina extends Specificnost implements Cloneable {
+private double zadatVmax;
+private double saveorig;
+
+	public Krivina(double maxx) {
+	zadatVmax=maxx;
+}
+public double max() {
+	return zadatVmax;
+}
+	@Override
+	public void ispoljiEfekat(Object obj) throws GNeodgovarajuciObjekat {
+		if(!(obj instanceof Vozilo)) throw new GNeodgovarajuciObjekat();
+		Vozilo v = (Vozilo) obj;
+		if(zadatVmax<v.dohvMaksBrzinu()) {
+			v.postMaksBrzinu(zadatVmax*v.dohvUpravljivost());
+		}
+
+	}
+
+	@Override
+	public void ponistiEfekat(Object obj) throws GNeodgovarajuciObjekat {
+		if(!(obj instanceof Vozilo)) throw new GNeodgovarajuciObjekat();
+		Vozilo v=(Vozilo) obj;
+		v.postMaksBrzinu(saveorig);
+
+	}
+	@Override
+	public Specificnost clone() {
+		return (Specificnost) super.clone();
+	}
+	public String toString() {
+		return "K"+zadatVmax;
+	}
+
+}

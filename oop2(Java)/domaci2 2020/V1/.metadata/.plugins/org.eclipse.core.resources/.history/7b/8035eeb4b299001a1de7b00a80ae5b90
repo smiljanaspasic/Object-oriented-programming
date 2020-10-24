@@ -1,0 +1,10 @@
+package raspored;
+
+public class Sadrzaj {
+private String naziv;
+private Vreme vtraj;
+public Sadrzaj(String naz,Vreme v) {
+	naziv=naz;
+	vtraj=v;
+}
+}

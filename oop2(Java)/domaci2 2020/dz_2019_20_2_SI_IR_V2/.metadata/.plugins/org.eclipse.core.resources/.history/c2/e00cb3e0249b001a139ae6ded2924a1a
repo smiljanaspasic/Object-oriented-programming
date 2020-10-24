@@ -1,0 +1,42 @@
+package karting;
+
+public class Deonica {
+private double duz;
+private Elem prvi,posl;
+private class Elem {
+	Specificnost spec;
+	Elem sled=null;
+	Elem(Specificnost s,Elem sled){
+		spec = s;
+		this.sled=sled;
+		if (prvi==null)
+			prvi=this;
+		else
+			posl.sled=this;
+		posl=this;
+	}
+}
+
+private double dohvduz() {
+	return duz;
+}
+	public Deonica(double d) {
+		duz=d;
+	}
+
+	public String dohvSpecificnost(int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void dodajSpecificnost(Specificnost s1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void izbaciSpecificnost(int dohvatiId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

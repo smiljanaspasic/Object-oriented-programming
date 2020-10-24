@@ -1,0 +1,27 @@
+package raspored;
+
+public class Ponavljajuci extends Sadrzaj {
+
+	private Vreme perioda;
+	
+	
+	public Ponavljajuci(String naziv, Vreme trajanje, Vreme peri) {
+		super(naziv,trajanje);
+		perioda=peri;
+	}
+  /*  public Sadrzaj poslednjeponavljanje() throws GVreme {
+    	Vreme vkraja=super.dohvPocetak().saberi(dohvPocetak(), super.getVtraj());
+    	Vreme novipocetak=new Vreme();
+    	while(vkraja.saberi(vkraja, perioda)) {
+    		
+    	}
+    }*/
+
+	@Override
+	public char vrsta() {
+		return 'P';
+	}
+public String toString() {
+	return super.toString()+"T"+perioda;
+}
+}

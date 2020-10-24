@@ -1,0 +1,4 @@
+INDEX VERSION 1.131+C:\Users\smilj\Desktop\faks\oop2\domaci2 2020\dz_2019_20_2_SI_IR_V3\.metadata\.plugins\org.eclipse.jdt.core
+789344348.index
+1301599739.index
+3701421313.index

@@ -1,0 +1,136 @@
+package raspored;
+
+public class Sema {
+	private int cnt;
+	private String naziv;
+	private Vreme pocetak; 
+	private Vreme kraj;
+	private Elem prvi = null;
+
+	private static class Elem {
+		Sadrzaj sadrzaj;
+		Elem sledeci=null;
+
+		Elem(Sadrzaj sadrzaj, Elem sledeci) {
+			this.sadrzaj = sadrzaj;
+			this.sledeci = sledeci;
+		}
+		
+		Elem(Sadrzaj sadrzaj) {
+			this.sadrzaj = sadrzaj;
+			
+		}
+		
+		
+	}
+
+	public Sema(String naziv) { 
+		this.naziv = naziv;
+		try {
+			this.pocetak = new Vreme(8, 0);
+			this.kraj = new Vreme(22, 0);
+		} catch (GVreme g) {
+		}
+	}
+
+	public Sema(String naziv, Vreme pocetak, Vreme kraj) {
+		this.naziv = naziv;
+		this.pocetak = pocetak;
+		this.kraj = kraj;
+	}
+
+	public Sema dodaj(Sadrzaj s) throws GDodaj {
+		int pocetak = s.dohvPocetak().dohvVreme();
+		int pocetak0 = pocetak;
+		if (pocetak < this.pocetak.dohvVreme()) {
+			pocetak=this.pocetak.dohvVreme();
+			try {
+				s.setPocetak(new Vreme(pocetak/60,pocetak%60));
+			} catch (GVreme e) {}
+		}
+		int kraj = Vreme.saberi(s.dohvPocetak(), s.dohvTrajanje()).dohvVreme();
+		if (kraj>this.kraj.dohvVreme())
+			throw new GDodaj();
+		if (prvi == null) {
+			Elem novi = new Elem(s);
+			prvi = novi;
+			cnt++;
+			return this;
+		}
+		
+		boolean moze = false;
+		while (!moze && kraj < this.kraj.dohvVreme()) {
+			try {
+				s.setPocetak(new Vreme(pocetak/60,pocetak%60));
+			} catch (GVreme e) {}
+			moze = true;
+			for (Elem tek=prvi; moze && tek!=null; tek=tek.sledeci) {
+				if (s.preklapaSe(tek.sadrzaj) != null)
+					moze = false;
+			}
+
+			if (!moze) {
+				pocetak += 15;
+				kraj += 15;
+			}
+		}
+		if (!moze) {
+			try {
+				s.setPocetak(new Vreme(pocetak0/60,pocetak0%60));
+			} catch (GVreme e) {}
+			throw new GDodaj();
+		}
+		
+		Elem preth = null, tek = prvi;
+		while (tek!= null && pocetak > tek.sadrzaj.dohvPocetak().dohvVreme()) {
+			preth = tek;
+			tek = tek.sledeci;
+		}
+		
+		Elem novi = new Elem(s,tek);
+		if (preth == null) 
+			prvi = novi;
+		else 
+			preth.sledeci = novi;
+		cnt++;
+		return this;
+	}
+
+	public int getBrojSadrzaja() {
+		return cnt;
+	}
+	
+	
+	public double zauzetost() {
+		Elem tek = prvi;
+		int ukupno = kraj.dohvVreme() - pocetak.dohvVreme();
+		int suma = 0;
+		while (tek != null) {
+			int n = (kraj.dohvVreme() - Vreme.saberi(tek.sadrzaj.dohvPocetak(),tek.sadrzaj.dohvTrajanje()).dohvVreme())
+					/((Ponavljajuci) tek.sadrzaj).dohvPerioda().dohvVreme() + 1; 
+			suma += tek.sadrzaj.dohvTrajanje().dohvVreme() * n;
+		
+			tek = tek.sledeci;
+		}
+		
+		return suma * 100. /  ukupno;
+	}
+
+	public Sadrzaj dohvati(int ind) throws GIndeks {
+		if (ind >=cnt || ind < 0 )
+			throw new GIndeks();
+		Elem tek = prvi;
+		for (int i = 0; i < ind; i++)
+			tek = tek.sledeci;
+		return tek.sadrzaj;
+	}
+	
+	public String toString() {
+		StringBuilder sb = new StringBuilder(naziv + " : "+pocetak+" - "+kraj);
+		for(Elem tek=prvi;tek!=null;tek=tek.sledeci) {
+			sb.append("\n" + tek.sadrzaj);
+		}
+		return sb.append("\n").toString();
+	}
+
+}

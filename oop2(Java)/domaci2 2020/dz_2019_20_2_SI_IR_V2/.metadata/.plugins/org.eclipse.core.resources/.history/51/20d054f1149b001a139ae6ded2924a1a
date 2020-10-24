@@ -1,0 +1,17 @@
+package karting;
+
+public class Krivina extends Specificnost {
+
+	@Override
+	public void ispoljiEfekat(Vozilo v) throws GNeodgovarajuciObjekat {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void ponistiEfekat(Vozilo v) throws GNeodgovarajuciObjekat {
+		// TODO Auto-generated method stub
+
+	}
+
+}

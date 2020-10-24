@@ -1,0 +1,13 @@
+package main;
+
+import pitanja.GNemaPitanja;
+import pitanja.IteratorPitanja;
+import pitanja.Pitanje;
+import pitanja.PitanjeSaPonudjenimOdgovorima;
+import pitanja.ZbirkaPitanja;
+
+public class Main {
+
+	public static void main(String[] args) {
+    	System.out.print("Hekk no");
+} 

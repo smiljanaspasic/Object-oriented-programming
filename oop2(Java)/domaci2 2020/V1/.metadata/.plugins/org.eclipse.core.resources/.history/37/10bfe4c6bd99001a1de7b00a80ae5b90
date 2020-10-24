@@ -1,0 +1,19 @@
+package raspored;
+
+public class Ponavljajuci extends Sadrzaj {
+
+	private Vreme perioda;
+	
+	
+	public Ponavljajuci(String naziv, Vreme trajanje, Vreme peri) {
+		super(naziv,trajanje);
+		perioda=peri;
+	}
+
+
+	@Override
+	public char vrsta() {
+		return 'P';
+	}
+
+}

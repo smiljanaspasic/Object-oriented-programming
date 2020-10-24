@@ -1,0 +1,3 @@
+﻿  Source.cpp
+Source.obj : error LNK2019: unresolved external symbol "class Piksel __cdecl p1(void)" (?p1@@YA?AVPiksel@@XZ) referenced in function _main
+C:\Users\smilj\Desktop\faks\oop1\lab1\V2\V2\Debug\V2.exe : fatal error LNK1120: 1 unresolved externals

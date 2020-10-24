@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.lang.CloneNotSupportedException"/>
+    <fullyQualifiedTypeName name="pitanja.GNemaPitanja"/>
+    <fullyQualifiedTypeName name="pitanja.IteratorPitanja.Elem"/>
+    <fullyQualifiedTypeName name="pitanja.ZbirkaPitanja"/>
+    <fullyQualifiedTypeName name="pitanja.ZbirkaPitanja.Elem"/>
+    <fullyQualifiedTypeName name="pitanja.IteratorPitanja"/>
+    <fullyQualifiedTypeName name="java.lang.StringBuilder"/>
+</qualifiedTypeNameHistroy>

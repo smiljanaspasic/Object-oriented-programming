@@ -1,0 +1,74 @@
+package raspored;
+
+public class Sema {
+    private Vreme pocseme;
+    private Vreme krajseme;
+    private String naziv;
+    private Elem prvi,posl,tek;
+    private class Elem {
+    	Sadrzaj s;
+    	Elem sled;
+    	Elem pret;
+    	Elem(Sadrzaj sad) {
+    		s=sad;
+    		sled=null;
+    		pret=null;
+    } }
+	public Sema(String string) {
+		try {
+			pocseme=new Vreme(8,0);
+		} catch (GVreme e) {
+			e.printStackTrace();
+		}
+		try {
+			krajseme=new Vreme(22,0);
+		} catch (GVreme e) {
+			e.printStackTrace();
+		}
+		naziv=string;
+	}
+
+	public void dodaj(Sadrzaj s1) throws GDodaj, GVreme {
+		int sadrzpoc=s1.vPoc.vrememin();
+		int sadrzkraj=Vreme.saberi(s1.vPoc, s1.vtraj).vrememin();
+	    if((sadrzpoc<pocseme.vrememin()) || (sadrzpoc>krajseme.vrememin()) || (sadrzkraj>krajseme.vrememin()) ) throw new GDodaj();
+	    else {
+	    	if(prvi==null) { Elem novi=new Elem(s1); prvi=novi;posl=novi;}
+	    	else {
+	    		for(tek=prvi;tek!=posl;tek=tek.sled) {
+	    			if(tek.s.vPoc.vrememin()<sadrzpoc) break;
+	    		}
+	    		Vreme preklop=tek.pret.s.preklapaSe(s1);
+	    		if(preklop!=null) { 
+	    			int pomeraj=tek.pret.s.vPoc.saberi(tek.pret.s.vPoc, tek.pret.s.vtraj).vrememin()-preklop.vrememin();
+	    		    Vreme pomerajvrem=new Vreme(pomeraj/60,pomeraj%60);
+	    			s1.pomeri(pomerajvrem);
+	    			sadrzpoc=s1.vPoc.vrememin();
+	    			sadrzkraj=Vreme.saberi(s1.vPoc, s1.vtraj).vrememin();
+	    		}
+	    		if((sadrzkraj>tek.s.vPoc.saberi(tek.s.vPoc, tek.s.vtraj).vrememin()) || sadrzkraj>krajseme.vrememin()) throw new GDodaj();
+	    		else {
+	    			Elem novi=new Elem(s1);novi.pret=tek.pret;novi.sled=tek;  tek.pret.sled=novi; tek.pret=novi;
+	    		}
+	    	}
+	    }
+	}
+	public Vreme zauzetost() {
+		
+	}
+public String toString() {
+	StringBuilder s=new StringBuilder();
+	s.append(naziv).append(":").append(pocseme).append("-").append(krajseme).append("\n");
+	for(tek=prvi;tek!=posl;tek=tek.sled) {
+		s.append(tek.s);
+	}
+	return s.toString();
+}
+public int broj() {
+	int cnt=0;
+	for(tek=prvi;tek!=posl;tek=tek.sled) {
+		cnt++;
+	}
+	return cnt;
+}
+}

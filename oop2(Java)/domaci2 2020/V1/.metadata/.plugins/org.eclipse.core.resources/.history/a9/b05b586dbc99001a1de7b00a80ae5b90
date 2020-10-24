@@ -1,0 +1,51 @@
+package raspored;
+
+public abstract class Sadrzaj {
+private String naziv;
+private Vreme vtraj;
+private Vreme vPoc= new Vreme();
+
+
+public Vreme preklapaSe(Sadrzaj s2) throws GVreme {
+	Vreme vkraj1=vPoc.saberi(vPoc, vtraj);
+	Vreme vkraj2=s2.vPoc.saberi(s2.vPoc,s2.vtraj);
+	for(Vreme Vtren=vPoc;Vtren.jednakovreme(vkraj1);Vtren.saberi(Vtren, new Vreme(0,15))) {
+		for(Vreme Vtren2=s2.vPoc;Vtren2.jednakovreme(vkraj2);Vtren2.saberi(Vtren2, new Vreme(0,15))) {
+			if(Vtren.jednakovreme(Vtren2)) {
+				Vreme vpreklop=Vtren;
+				return vpreklop;
+			}
+		}
+	}
+	return null;
+	
+}
+public void pomeri(Vreme pomeraj) throws GVreme {
+	vPoc.saberi(vPoc, pomeraj);
+	
+}
+public Vreme getvPoc() {
+	return vPoc;
+}
+public void setvPoc(Vreme vPoc) {
+	this.vPoc = vPoc;
+}
+public String getNaziv() {
+	return naziv;
+}
+public Vreme getVtraj() {
+	return vtraj;
+}
+public abstract char vrsta();
+public String toString() {
+	Vreme vkraj=new Vreme();
+try {
+	 vkraj=vPoc.saberi(vPoc, vtraj);
+} catch (GVreme e) {
+	e.printStackTrace();
+}
+return vrsta()+","+naziv+"|"+vPoc+"-"+vkraj;
+} 
+
+
+}

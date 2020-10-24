@@ -1,0 +1,11 @@
+package raspored;
+
+public class Ponavljajuci extends Sadrzaj {
+
+	@Override
+	public char vrsta() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

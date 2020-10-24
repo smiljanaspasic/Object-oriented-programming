@@ -1,0 +1,44 @@
+package raspored;
+
+public abstract class Sadrzaj {
+	protected String naziv;
+	protected Vreme vtraj;
+	protected Vreme vPoc = new Vreme();
+
+	public Sadrzaj(String nazivv, Vreme trajanje) {
+		naziv = nazivv;
+		vtraj = trajanje;
+	}
+
+	public abstract Vreme preklapaSe(Sadrzaj s2) throws GVreme;
+
+	public void pomeri(Vreme pomeraj) throws GVreme {
+		vPoc = Vreme.saberi(vPoc, pomeraj);
+
+	}
+
+	public Vreme dohvPocetak() {
+		return vPoc;
+	}
+
+	public void setvPoc(Vreme vPoc) {
+		this.vPoc = vPoc;
+	}
+
+	public String getNaziv() {
+		return naziv;
+	}
+
+	public Vreme getVtraj() {
+		return vtraj;
+	}
+
+	public abstract char vrsta();
+
+	public String toString() {
+		Vreme vkraj = new Vreme();
+		vkraj = vPoc.saberi(vPoc, vtraj);
+		return vrsta() + "," + naziv + "|" + vPoc + "-" + vkraj;
+	}
+
+}

@@ -1,0 +1,92 @@
+package karting;
+
+public class Deonica implements Cloneable {
+private double duz;
+private Elem prvi,posl;
+private class Elem {
+	Elem sled;
+	Specificnost spec;
+	Elem(Specificnost s){
+		spec = s;
+		sled=null;
+		if (prvi==null)
+			prvi=this;
+		else
+			posl.sled=this;
+		posl=this;
+	}
+}
+
+private double len() {
+	return duz;
+}
+	public Deonica(double d) {
+		duz=d;
+	}
+public int dohvBrSpec() {
+	int num=0;
+	for(Elem tek=prvi;tek!=null;tek=tek.sled) {
+		num++;
+	}
+	return num;
+	 }
+
+	public Specificnost dohvSpecificnost(int i)  {
+		if(i<0 || i>=brojelemenata() ) return null;
+		Elem tek=prvi;
+		for(int x=0;x<i;x++) {tek=tek.sled; }
+		return tek.spec;
+	}
+	public String toString() {
+		StringBuilder s = new StringBuilder("deonica("+len()+"m)");
+		for(Elem tek=prvi;tek!=null;tek=tek.sled) {
+			s.append("\n"+tek.spec);
+		}
+		return s.toString();
+	}
+	public void dodajSpecificnost(Specificnost s1) {
+		new Elem(s1);
+		
+	}
+
+	public void izbaciSpecificnost(int ident) {
+		Elem tek=prvi;
+		Elem preth = tek;
+		while(tek!=null) {
+			if(tek.spec.dohvatiId()==ident) {
+			if (tek==prvi) {
+					prvi=prvi.sled;
+					tek=null;
+				}
+			else {					
+				preth.sled=tek.sled;
+				if(tek==posl)
+				posl=preth;
+				tek=null;
+				}
+				
+				break;
+			}
+			preth=tek;
+			tek=tek.sled;
+		}
+		
+		
+	}
+@Override
+public Deonica clone()  {
+		try {
+			Deonica d = (Deonica)super.clone();
+			d.prvi = d.posl = null;
+			for (Elem tek=prvi; tek!=null; tek=tek.sled) {
+				d.dodajSpecificnost(tek.spec.clone());
+			}
+			return d;
+		} catch (CloneNotSupportedException e) {
+			return null;
+		}
+	}
+	
+
+}
+
